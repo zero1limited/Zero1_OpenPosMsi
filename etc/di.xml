@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\InventorySales\Model\IsProductSalableCondition\IsAnySourceItemInStockCondition">
+        <plugin name="zero1_pos_is_product_salable_bypass" type="Zero1\PosMsi\Plugin\IsProductSalableBypass" sortOrder="10"/>
+    </type>
+
+    <type name="Magento\InventorySales\Model\IsProductSalableCondition\BackOrderCondition">
+        <plugin name="zero1_pos_backorder_condition_bypass" type="Zero1\PosMsi\Plugin\BackorderConditionBypass" sortOrder="10"/>
+    </type>
+</config>
