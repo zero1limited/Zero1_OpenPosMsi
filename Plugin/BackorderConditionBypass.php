@@ -1,9 +1,9 @@
 <?php
 
-namespace Zero1\PosMsi\Plugin;
+namespace Zero1\OpenPosMsi\Plugin;
 
 use Magento\InventorySales\Model\IsProductSalableCondition\BackOrderCondition;
-use Zero1\Pos\Helper\Data as PosHelper;
+use Zero1\OpenPos\Helper\Data as PosHelper;
 
 class BackorderConditionBypass
 {
