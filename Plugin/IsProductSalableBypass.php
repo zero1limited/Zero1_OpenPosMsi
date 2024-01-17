@@ -1,6 +1,6 @@
 <?php
 
-namespace Zero1\PosMsi\Plugin;
+namespace Zero1\OpenPosMsi\Plugin;
 
 use Magento\InventorySales\Model\IsProductSalableCondition\IsAnySourceItemInStockCondition;
 use Zero1\OpenPos\Helper\Data as PosHelper;
