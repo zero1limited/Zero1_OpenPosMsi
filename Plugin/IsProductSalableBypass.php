@@ -3,7 +3,7 @@
 namespace Zero1\PosMsi\Plugin;
 
 use Magento\InventorySales\Model\IsProductSalableCondition\IsAnySourceItemInStockCondition;
-use Zero1\Pos\Helper\Data as PosHelper;
+use Zero1\OpenPos\Helper\Data as PosHelper;
 
 class IsProductSalableBypass
 {
