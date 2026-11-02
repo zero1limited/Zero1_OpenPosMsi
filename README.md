@@ -1,13 +1,30 @@
 # Zero1_OpenPosMsi
 
-This module will give the ability to take an order in Burnley for example, but ship from Buxton
+Magento Inventory (MSI) support for ZERO-1 OpenPOS.
 
-Instore customer at the till enquires about a product that's not in the current store - asking if it's available elsewhere
+OpenPOS on its own works with Magento's legacy stock handling. Install this module on stores where Magento Inventory (MSI) is enabled, so till sales update stock levels:
 
-Cashier searches for that product on OpenPOS and then PDP will say "Yes, this is available in Buxton"
+```
+composer require zero1/open-pos-msi
+php bin/magento setup:upgrade
+```
 
-Customer requests purchase
+## What it does
 
-Cashier adds the product and clicks "Ship to customer" button
+- **Till sales deduct stock.** OpenPOS orders are virtual, so they are never shipped and MSI never deducts them from a source. This module deducts the items from the shop's source when a till sale is placed, and closes MSI's reservation for the order.
+- **Layaways** are deducted when they are fully paid, or when they are placed (see configuration).
+- **Cancelled layaways** that were already deducted have their stock put back.
+- **Credit memos** with "Return to Stock" put till sale items back on the source they were deducted from.
+- **Bypass stock checks** works under MSI: when enabled, the till can sell items MSI considers out of stock. If a source holds less than was sold, it is reduced to zero.
+- **Returns** (OpenPOS RMA) no longer reduce stock or fail for out of stock items. As without MSI, returned items are not added back to stock.
 
-This then activates delivery options and magento handles the stock location from MSI settings in admin
+## Configuration
+
+[Stores] -> [Configuration] -> [OpenPOS] -> [Configuration] -> [Inventory (MSI)]
+
+| Setting | Description |
+|---------|-------------|
+| Source | The source representing the shop. Automatic uses the highest priority source, assigned to the POS website's stock, that holds the product. |
+| Deduct layaway stock | When fully paid (default), or when placed. |
+
+Tested with Magento 2.4.8 (Magento Inventory 1.3).

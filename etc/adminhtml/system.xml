@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="openpos">
+            <group id="msi" translate="label" type="text" sortOrder="25" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Inventory (MSI)</label>
+                <field id="source_code" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Source</label>
+                    <source_model>Zero1\OpenPosMsi\Model\Config\Source\SourceCode</source_model>
+                    <comment>The source representing the shop, which till sales are deducted from. Automatic uses the highest priority source, assigned to the POS website's stock, that holds the product.</comment>
+                </field>
+                <field id="layaway_deduction" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Deduct layaway stock</label>
+                    <source_model>Zero1\OpenPosMsi\Model\Config\Source\LayawayDeduction</source_model>
+                    <comment>Until then the stock is reserved, so it can't be sold elsewhere.</comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

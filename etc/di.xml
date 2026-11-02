@@ -1,10 +1,36 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
-    <type name="Magento\InventorySales\Model\IsProductSalableCondition\IsAnySourceItemInStockCondition">
-        <plugin name="zero1_openpos_is_product_salable_bypass" type="Zero1\OpenPosMsi\Plugin\IsProductSalableBypass" sortOrder="10"/>
+    <type name="Magento\InventorySales\Model\AppendReservations">
+        <plugin name="zero1_openposmsi_exclude_returns_from_reservations" type="Zero1\OpenPosMsi\Plugin\ExcludeReturnsFromReservations" sortOrder="10"/>
+    </type>
+    <type name="Magento\InventorySales\Model\CheckItemsQuantity">
+        <plugin name="zero1_openposmsi_bypass_stock_check" type="Zero1\OpenPosMsi\Plugin\BypassStockCheck" sortOrder="10"/>
     </type>
 
-    <type name="Magento\InventorySales\Model\IsProductSalableCondition\BackOrderCondition">
-        <plugin name="zero1_openpos_backorder_condition_bypass" type="Zero1\OpenPosMsi\Plugin\BackorderConditionBypass" sortOrder="10"/>
+    <!-- Credit memos returning till sale items to stock put them back on the source they were deducted from -->
+    <type name="Magento\InventorySalesApi\Model\ReturnProcessor\GetSourceDeductedOrderItemsChain">
+        <arguments>
+            <argument name="sourceDeductedItemsSelector" xsi:type="array">
+                <item name="openpos_till_sale_items" xsi:type="object">Zero1\OpenPosMsi\Model\ReturnProcessor\GetTillSaleDeductedItems</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!-- These plugins run for every order and stock check, so only load the till session classes when needed -->
+    <type name="Zero1\OpenPosMsi\Plugin\ExcludeReturnsFromReservations">
+        <arguments>
+            <argument name="orderManagement" xsi:type="object">Zero1\OpenPos\Model\OrderManagement\Proxy</argument>
+        </arguments>
+    </type>
+    <type name="Zero1\OpenPosMsi\Plugin\BypassStockCheck">
+        <arguments>
+            <argument name="tillSessionManagement" xsi:type="object">Zero1\OpenPos\Model\TillSessionManagement\Proxy</argument>
+        </arguments>
+    </type>
+    <type name="Zero1\OpenPosMsi\Observer\RestoreStockOnCancel">
+        <arguments>
+            <argument name="stockDeduction" xsi:type="object">Zero1\OpenPosMsi\Model\StockDeduction\Proxy</argument>
+            <argument name="orderManagement" xsi:type="object">Zero1\OpenPos\Model\OrderManagement\Proxy</argument>
+        </arguments>
     </type>
 </config>

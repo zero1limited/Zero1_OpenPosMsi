@@ -1,0 +1,21 @@
+{
+    "openpos_msi_source_deduction": {
+        "column": {
+            "deduction_id": true,
+            "order_id": true,
+            "order_item_id": true,
+            "sku": true,
+            "source_code": true,
+            "qty": true,
+            "qty_deducted": true,
+            "created_at": true
+        },
+        "index": {
+            "OPENPOS_MSI_SOURCE_DEDUCTION_ORDER_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "OPENPOS_MSI_SOURCE_DEDUCTION_ORDER_ID_SALES_ORDER_ENTITY_ID": true
+        }
+    }
+}

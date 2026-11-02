@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="openpos_till_sale_placed">
+        <observer name="zero1_openposmsi_deduct_stock" instance="Zero1\OpenPosMsi\Observer\DeductStockOnTillSale" />
+    </event>
+    <event name="openpos_order_paid">
+        <observer name="zero1_openposmsi_deduct_stock" instance="Zero1\OpenPosMsi\Observer\DeductStockOnOrderPaid" />
+    </event>
+    <event name="order_cancel_after">
+        <observer name="zero1_openposmsi_restore_stock" instance="Zero1\OpenPosMsi\Observer\RestoreStockOnCancel" />
+    </event>
+</config>
