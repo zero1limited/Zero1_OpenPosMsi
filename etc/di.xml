@@ -33,4 +33,12 @@
             <argument name="orderManagement" xsi:type="object">Zero1\OpenPos\Model\OrderManagement\Proxy</argument>
         </arguments>
     </type>
+
+    <type name="Zero1\OpenPos\Model\ModuleIntegration">
+        <arguments>
+            <argument name="openPosModules" xsi:type="array">
+                <item name="Zero1_OpenPosMsi" xsi:type="string">Zero1_OpenPosMsi</item>
+            </argument>
+        </arguments>
+    </type>
 </config>
